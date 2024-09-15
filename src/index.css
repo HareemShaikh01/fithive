@@ -10,20 +10,20 @@ html{
 }
 
 .category{
-    background-image: url("./omid-armin-rAh9rA53UWk-unsplash.jpg");
+    background-image: url("public/omid-armin-rAh9rA53UWk-unsplash.jpg");
     background-size: cover;
     background-position: top right;
 }
 
 footer{
-    background-image: url("./wallpaperflare.com_wallpaper.jpg");
+    background-image: url("public/wallpaperflare.com_wallpaper.jpg");
     background-size: cover;
     background-position: center;
     padding-bottom: 20px;
 }
 
 #profile,#categoryDetails{
-    background-image:linear-gradient(rgba(0, 0, 0, 0.438) , black), url("./Black-Design-Wallpaper-1428.jpg");
+    background-image:linear-gradient(rgba(0, 0, 0, 0.438) , black), url("public/Black-Design-Wallpaper-1428.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
