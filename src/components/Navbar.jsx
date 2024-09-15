@@ -72,7 +72,7 @@ function Navbar() {
                 {openMenu && (
                     <ul
                         ref={menuRef}
-                        className='px-4 absolute md:relative top-14 md:top-0 flex flex-col md:flex-row text-lg'
+                        className='px-4 absolute md:relative top-14 md:top-0 left-0  flex flex-col md:flex-row text-lg w-full md:w-fit bg-[#000000d0] md:bg-[#0000]'
                     >
                         <li className='p-4 md:py-2 px-10 md:px-4'>
                             <HashLink className='text-white font-serif font-semibold hover:text-green-500 hover:underline underline-offset-4' smooth to="/#reviews">Reviews</HashLink>
