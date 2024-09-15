@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { addWorkouts } from '../Firebase/DB';
+// import { addWorkouts } from '../Firebase/DB';
 import { useUserStore } from '../store/userSlice';
 
 function Category() {
@@ -38,25 +38,28 @@ function Category() {
 
     }, []);
 
-    useEffect(() => {
-        const updateWorkouts = async () => {
-            if (Id && length && id) {
-                const workoutData = {
-                    categoryName: Id,
-                    totalDays: length
-                };
 
-                try {
-                    await addWorkouts(id, workoutData);
-                    console.log('Workout added successfully');
-                } catch (error) {
-                    console.error('Error adding workout:', error);
-                }
-            }
-        };
+    // BUG
 
-        updateWorkouts();
-    }, [Id, id, length]);
+    // useEffect(() => {
+    //     const updateWorkouts = async () => {
+    //         if (Id && length && id) {
+    //             const workoutData = {
+    //                 categoryName: Id,
+    //                 totalDays: length
+    //             };
+
+    //             try {
+    //                 await addWorkouts(id, workoutData);
+    //                 console.log('Workout added successfully');
+    //             } catch (error) {
+    //                 console.error('Error adding workout:', error);
+    //             }
+    //         }
+    //     };
+
+    //     updateWorkouts();
+    // }, [Id, id, length]);
 
 
     return (

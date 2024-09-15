@@ -40,10 +40,10 @@ function Profile() {
 
                 <li className=' py-4'>
                 <i className="fa-solid fa-dumbbell text-white px-2 text-xl md:text-2xl rotate-90"></i>
-                <h1 className='inline text-xl md:text-2xl font-semibold px-4'>Abs</h1>
+                <h1 className='inline text-xl md:text-2xl font-semibold px-4'>Waist</h1>
 
                 <div className="inline float-right text-xl md:text-3xl">
-                    <span className='text-green-500 text-2xl font-semibold font-mono'>7</span>/8 Days
+                    <span className='text-green-500 text-2xl font-semibold font-mono'>2</span>/6 Days
                 </div>
                 <br />
                 <button className='bg-green-500 rounded-xl px-10 text-black font-semibold font-mono m-2 my-6'>Done</button>

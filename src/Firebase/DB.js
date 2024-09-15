@@ -30,32 +30,33 @@ export const getUserById = async (userId, setUserState) => {
     }
 };
 
+// BUG
 
-export const addWorkouts = async (userId, { categoryName, totalDays }) => {
-    const workoutDocRef = doc(db, 'users', userId, 'workouts', categoryName);
+// export const addWorkouts = async (userId, { categoryName, totalDays }) => {
+//     const workoutDocRef = doc(db, 'users', userId, 'workouts', categoryName);
     
-    console.log(`Adding workout for userId: ${userId}, categoryName: ${categoryName}`);
+//     console.log(`Adding workout for userId: ${userId}, categoryName: ${categoryName}`);
 
-    try {
-        // Check if the workout document already exists
-        const docSnap = await getDoc(workoutDocRef);
-        if (docSnap.exists()) {
-            console.log('Workout already exists with categoryName:', categoryName);
-            return; 
-        }
+//     try {
+//         // Check if the workout document already exists
+//         const docSnap = await getDoc(workoutDocRef);
+//         if (docSnap.exists()) {
+//             console.log('Workout already exists with categoryName:', categoryName);
+//             return; 
+//         }
 
-        // Define the workout data
-        const workoutData = {
-            totalDays,
-            doneDays: 0,
-            doneExercises: []
-        };
+//         // Define the workout data
+//         const workoutData = {
+//             totalDays,
+//             doneDays: 0,
+//             doneExercises: []
+//         };
 
-        // Add the workout document
-        await setDoc(workoutDocRef, workoutData);
-        console.log('Workout added with categoryName:', categoryName);
-    } catch (e) {
-        console.error('Error adding workout:', e);
-    }
-};
+//         // Add the workout document
+//         await setDoc(workoutDocRef, workoutData);
+//         console.log('Workout added with categoryName:', categoryName);
+//     } catch (e) {
+//         console.error('Error adding workout:', e);
+//     }
+// };
 
