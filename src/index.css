@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    scrollbar-width:thin;
+    scrollbar-color: #22c55e rgba(0, 0, 0, 0.589);
+    background: rgba(26, 37, 28, 0.959);
+
+}
+
+.category{
+    background-image: url("./omid-armin-rAh9rA53UWk-unsplash.jpg");
+    background-size: cover;
+    background-position: top right;
+}
+
+footer{
+    background-image: url("./wallpaperflare.com_wallpaper.jpg");
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 20px;
+}
+
+#profile,#categoryDetails{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.438) , black), url("./Black-Design-Wallpaper-1428.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+
+
