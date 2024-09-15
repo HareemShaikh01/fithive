@@ -32,7 +32,7 @@ function Category() {
             }
         };
 
-        // fetchData();
+        fetchData();
 
 
 
