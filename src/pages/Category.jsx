@@ -17,7 +17,7 @@ function Category() {
             const options = {
                 method: 'GET',
                 headers: {
-                    'x-rapidapi-key': 'fdec053623msh7bccba7c17e4739p1fc95cjsn10212b47518c',
+                    'x-rapidapi-key': 'bb8fb435d6msh2e7c42a4d67130dp16c620jsn7e2e946b63f2',
                     'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
                 }
             };
@@ -25,8 +25,8 @@ function Category() {
             try {
                 const response = await fetch(url, options);
                 const result = await response.json();
-                setData(result);
-                setLength(result.length && result.length)
+               // setData(result);
+               // setLength(result.length && result.length)
             } catch (error) {
                 console.log(error.message);
             }

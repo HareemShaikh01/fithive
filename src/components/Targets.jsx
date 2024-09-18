@@ -15,7 +15,7 @@ export default function Targets() {
             const options = {
                 method: 'GET',
                 headers: {
-                    'x-rapidapi-key': 'fdec053623msh7bccba7c17e4739p1fc95cjsn10212b47518c',
+                    'x-rapidapi-key': 'bb8fb435d6msh2e7c42a4d67130dp16c620jsn7e2e946b63f2',
                     'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
                 }
             };
@@ -23,7 +23,9 @@ export default function Targets() {
             try {
                 const response = await fetch(url, options);
                 const result = await response.json();
-                setData(result);
+               // setData(result);
+                console.log(result);
+                
             } catch (error) {
                 console.log(error.message);
             }
