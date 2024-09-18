@@ -7,7 +7,6 @@ export default function Hero() {
   const[ authVisibility, setAuthVisibility] = useState(false);
 
   const tl = gsap.timeline();
-  const dumbellRef = useRef(null)
 
   useEffect(() => {
     tl.from(".logohead span", {
