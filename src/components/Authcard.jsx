@@ -41,6 +41,7 @@ export default function Authcard({ setVisibility }) {
       addUser({
         name: form.name,
         email:form.email,
+        workouts:[]
       }, userCredential.user.uid)
 
 

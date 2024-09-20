@@ -11,7 +11,7 @@ export default function Targets() {
 
     useEffect(() => {
         const fetchData = async () => {
-          //  const url = 'https://exercisedb.p.rapidapi.com/exercises/targetList';
+            // const url = 'https://exercisedb.p.rapidapi.com/exercises/targetList';
             const options = {
                 method: 'GET',
                 headers: {
@@ -23,7 +23,7 @@ export default function Targets() {
             try {
                 const response = await fetch(url, options);
                 const result = await response.json();
-               // setData(result);
+                setData(result);
                 console.log(result);
                 
             } catch (error) {

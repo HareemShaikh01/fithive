@@ -12,7 +12,7 @@ function Category() {
 
     useEffect(() => {
         const fetchData = async () => {
-           // const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
+            // const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -24,8 +24,8 @@ function Category() {
             try {
                 const response = await fetch(url, options);
                 const result = await response.json();
-               // setData(result);
-               // setLength(result.length && result.length)
+                setData(result);
+                setLength(result.length && result.length)
             } catch (error) {
                 console.log(error.message);
             }

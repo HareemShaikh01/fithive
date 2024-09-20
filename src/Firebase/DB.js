@@ -13,6 +13,8 @@ export const addUser = async (user, userId) => {
     }
 };
 
+
+
 export const getUserById = async (userId, setUserState) => {
     const docRef = doc(db, 'users', userId);
 

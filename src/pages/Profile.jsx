@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useUserStore } from '../store/userSlice'
 
 function Profile() {
     const {userName,userEmail} = useUserStore();
+
+    useEffect(()=>{
+        console.log(userName,userEmail);
+    },[])
 
 
   return (
