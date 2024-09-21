@@ -37,11 +37,18 @@ export const addWorkouts = async (userId, obj, category) => {
 
     try {
         // Update the 'workouts' array field with the new workout using arrayUnion
-        await updateDoc(docRef, {
-            workouts: arrayUnion(obj)  // Add the new workout to 'workouts' array
-        });
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const workouts = docSnap.data().workouts;
+            if (!workouts.some(workout => workout.name == category)) {
+                await updateDoc(docRef, {
+                    workouts: arrayUnion(obj)  // Add the new workout to 'workouts' array
+                });
+                alert(`Lets start excercises for ${category}`);
+            }
+        }
 
-        alert(`Lets start excercises for ${category}`);
+
     } catch (e) {
         alert("Error : workout is not added to your task bar")
         console.error('Error adding workout to array:', e); // Log any errors
@@ -56,7 +63,9 @@ export const markAsDone = async (userId, category, index) => {
         const docSnap = await getDoc(docRef);
         const userData = docSnap.data();
         const workouts = userData.workouts;
+        console.log(typeof workouts);
         
+
         // Find the index of the specific workout
         const categoryIndex = workouts.findIndex(workout => workout.name === category);
 
@@ -70,11 +79,42 @@ export const markAsDone = async (userId, category, index) => {
                     [`workouts.${categoryIndex}.doneEx`]: arrayUnion(index)
                 });
 
-                
-
-            } 
-        } 
+            }
+        }
     } catch (error) {
         console.log("Error in marking the exercise as done:", error);
+    }
+};
+
+
+export const getDoneEx = async (userId, category) => {
+    const docRef = doc(db, "users", userId);
+
+    try {
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const user = docSnap.data();
+
+            const workouts = user.workouts;
+            const categoryIndex = workouts.findIndex(workout => workout.name === category);
+
+            if (categoryIndex !== -1) {
+                const done = workouts[categoryIndex].doneEx;
+
+                console.log("Done exercises:", done);
+
+                return done;
+            } else {
+                console.log(`Category "${category}" not found in workouts.`);
+                return [];
+            }
+        } else {
+            console.log("User document not found.");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error getting done exercises data:", error);
+        return [];
     }
 };

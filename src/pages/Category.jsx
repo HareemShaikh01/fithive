@@ -4,18 +4,19 @@ import { useParams } from 'react-router-dom';
 import { useUserStore } from '../store/userSlice';
 import { addWorkouts } from '../Firebase/DB';
 import { markAsDone } from '../Firebase/DB';
+import { getDoneEx } from '../Firebase/DB';
 
 function Category() {
-    const {userId} = useUserStore()
+    const { userId } = useUserStore()
     const [data, setData] = useState([]);
-    const [length, setLength] = useState(0);
+    const [total, setTotal] = useState(0);
+    const [doneEx, setDoneEx] = useState([]);
     const { Id } = useParams();
-    const { id } = useUserStore();
 
 
     useEffect(() => {
         const fetchData = async () => {
-            // const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
+            const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -28,35 +29,31 @@ function Category() {
                 const response = await fetch(url, options);
                 const result = await response.json();
                 setData(result);
-                setLength(result.length && result.length)
+                setTotal(result && result.length)
             } catch (error) {
                 console.log(error.message);
             }
         };
 
         fetchData();
-
-
+        const done = getDoneEx(userId, Id);
+        setDoneEx(done);
 
     }, []);
 
-    useEffect(()=>{
+    // adding workout if not already present
+    useEffect(() => {
         addWorkouts(
             userId,
             {
-                name : Id,
-                totalEx : 0,
-                doneEx:[]
+                name: Id,
+                totalEx: total,
+                doneEx: []
 
             },
             Id
         )
-
-
-    },[])
-
-
-
+    }, [])
 
     return (
         <div id='categoryDetails'>
@@ -70,7 +67,7 @@ function Category() {
                             <p className='text-green-500 text-lg font-serif'>{item.id}</p>
                             <h1 className='text-xl font-serif md:text-2xl text-center capitalize'>{item.name}</h1>
                             <img className='w-full max-w-[300px] rounded-xl' src={item.gifUrl} alt={item.name} />
-                            <button className='bg-green-500 px-8 rounded-2xl text-black font-semibold'>Done</button>
+                            <button onClick={()=>markAsDone(userId,Id,index)} className='bg-green-500 px-8 rounded-2xl text-black font-semibold'>Done</button>
                             <ul className='list-decimal p-4'>
                                 <h1 className='text-lg text-green-500'>Instructions</h1>
                                 {item.instructions.map((list, i) => {
