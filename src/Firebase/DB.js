@@ -13,8 +13,6 @@ export const addUser = async (user, userId) => {
     }
 };
 
-
-
 export const getUserById = async (userId, setUserState) => {
     const docRef = doc(db, 'users', userId);
 
@@ -40,7 +38,7 @@ export const addWorkouts = async (userId, obj, category) => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const workouts = docSnap.data().workouts;
-            
+
             if (!workouts.some(workout => workout.name == category)) {
                 await updateDoc(docRef, {
                     workouts: arrayUnion(obj)  // Add the new workout to 'workouts' array
@@ -64,18 +62,18 @@ export const markAsDone = async (userId, category, index) => {
         const docSnap = await getDoc(docRef);
         const userData = docSnap.data();
         const workouts = userData.workouts;
-        
+
 
         // Find the index of the specific workout
         const categoryIndex = workouts.findIndex(workout => workout.name === category);
         console.log(categoryIndex);
-        
+
 
         if (categoryIndex !== -1) {
             // Check if the index is already included
             const doneExcercises = workouts[categoryIndex].doneEx;
 
-            workouts[categoryIndex].doneEx=[...doneExcercises,index];
+            workouts[categoryIndex].doneEx = [...doneExcercises, index];
 
             if (!doneExcercises.includes(index)) {
                 // Update the Firestore document using arrayUnion
@@ -101,7 +99,7 @@ export const getDoneEx = async (userId, category) => {
 
             const workouts = user.workouts;
             console.log(typeof workouts);
-            
+
             const categoryIndex = workouts.findIndex(workout => workout.name === category);
 
             if (categoryIndex !== -1) {
@@ -123,3 +121,20 @@ export const getDoneEx = async (userId, category) => {
         return [];
     }
 };
+
+export const getWorkouts = async (userId) => {
+    const docRef = doc(db,"users",userId);
+    
+    try {
+        const docSnap = await getDoc(docRef);
+        const workouts = docSnap.data().workouts;
+        // console.log(workouts);
+        return workouts ;
+          
+    } catch (error) {
+        console.log("error getting workouts for profile ",error);
+        
+        
+    }
+
+}
