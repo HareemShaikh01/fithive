@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserStore } from '../store/userSlice';
+import { addWorkouts } from '../Firebase/DB';
+import { markAsDone } from '../Firebase/DB';
 
 function Category() {
+    const {userId} = useUserStore()
     const [data, setData] = useState([]);
     const [length, setLength] = useState(0);
     const { Id } = useParams();
@@ -37,6 +40,21 @@ function Category() {
 
     }, []);
 
+    useEffect(()=>{
+        addWorkouts(
+            userId,
+            {
+                name : Id,
+                totalEx : 0,
+                doneEx:[]
+
+            },
+            Id
+        )
+
+
+    },[])
+
 
 
 
@@ -52,7 +70,7 @@ function Category() {
                             <p className='text-green-500 text-lg font-serif'>{item.id}</p>
                             <h1 className='text-xl font-serif md:text-2xl text-center capitalize'>{item.name}</h1>
                             <img className='w-full max-w-[300px] rounded-xl' src={item.gifUrl} alt={item.name} />
-                            <button className='bg-green-500 px-8 rounded-2xl text-black font-semibold'>Start</button>
+                            <button className='bg-green-500 px-8 rounded-2xl text-black font-semibold'>Done</button>
                             <ul className='list-decimal p-4'>
                                 <h1 className='text-lg text-green-500'>Instructions</h1>
                                 {item.instructions.map((list, i) => {

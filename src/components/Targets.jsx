@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import { useUserStore } from '../store/userSlice';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Targets() {
+    const {userId} = useUserStore();
     const [data, setData] = useState([]);
     const [category, setCategory] = useState("abs")
 
@@ -69,6 +71,8 @@ export default function Targets() {
     const selectCategory = (e) => {
         setCategory(e.target.value);
     }
+
+   
 
 
     return (
