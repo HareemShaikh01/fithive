@@ -40,6 +40,7 @@ export const addWorkouts = async (userId, obj, category) => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const workouts = docSnap.data().workouts;
+            
             if (!workouts.some(workout => workout.name == category)) {
                 await updateDoc(docRef, {
                     workouts: arrayUnion(obj)  // Add the new workout to 'workouts' array
@@ -63,20 +64,23 @@ export const markAsDone = async (userId, category, index) => {
         const docSnap = await getDoc(docRef);
         const userData = docSnap.data();
         const workouts = userData.workouts;
-        console.log(typeof workouts);
         
 
         // Find the index of the specific workout
         const categoryIndex = workouts.findIndex(workout => workout.name === category);
+        console.log(categoryIndex);
+        
 
         if (categoryIndex !== -1) {
             // Check if the index is already included
-            const doneEx = workouts[categoryIndex].doneEx;
+            const doneExcercises = workouts[categoryIndex].doneEx;
 
-            if (!doneEx.includes(index)) {
+            workouts[categoryIndex].doneEx=[...doneExcercises,index];
+
+            if (!doneExcercises.includes(index)) {
                 // Update the Firestore document using arrayUnion
                 await updateDoc(docRef, {
-                    [`workouts.${categoryIndex}.doneEx`]: arrayUnion(index)
+                    workouts: workouts
                 });
 
             }
@@ -85,7 +89,6 @@ export const markAsDone = async (userId, category, index) => {
         console.log("Error in marking the exercise as done:", error);
     }
 };
-
 
 export const getDoneEx = async (userId, category) => {
     const docRef = doc(db, "users", userId);
@@ -97,6 +100,8 @@ export const getDoneEx = async (userId, category) => {
             const user = docSnap.data();
 
             const workouts = user.workouts;
+            console.log(typeof workouts);
+            
             const categoryIndex = workouts.findIndex(workout => workout.name === category);
 
             if (categoryIndex !== -1) {

@@ -9,14 +9,14 @@ import { getDoneEx } from '../Firebase/DB';
 function Category() {
     const { userId } = useUserStore()
     const [data, setData] = useState([]);
-    const [total, setTotal] = useState(0);
+    const [total, setTotal] = useState(-1);
     const [doneEx, setDoneEx] = useState([]);
     const { Id } = useParams();
 
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
+            //const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -35,25 +35,41 @@ function Category() {
             }
         };
 
-        fetchData();
-        const done = getDoneEx(userId, Id);
-        setDoneEx(done);
+        const gettingExcerciseIndeces = async()=>{
+            const done = await getDoneEx(userId, Id);
+            setDoneEx(done);
+    
+        }
 
+        fetchData();
+        gettingExcerciseIndeces();
+    
     }, []);
 
     // adding workout if not already present
     useEffect(() => {
-        addWorkouts(
-            userId,
-            {
-                name: Id,
-                totalEx: total,
-                doneEx: []
+        if (total != -1) {
+            addWorkouts(
+                userId,
+                {
+                    name: Id,
+                    totalEx: total,
+                    doneEx: []
 
-            },
-            Id
-        )
-    }, [])
+                },
+                Id
+            )
+        }
+
+    }, [total])
+
+    const markingDone = (index)=>{
+        markAsDone(userId, Id, index);
+        if(!doneEx.includes(index)){
+            setDoneEx([...doneEx,index]);
+        }
+
+    }
 
     return (
         <div id='categoryDetails'>
@@ -67,7 +83,8 @@ function Category() {
                             <p className='text-green-500 text-lg font-serif'>{item.id}</p>
                             <h1 className='text-xl font-serif md:text-2xl text-center capitalize'>{item.name}</h1>
                             <img className='w-full max-w-[300px] rounded-xl' src={item.gifUrl} alt={item.name} />
-                            <button onClick={()=>markAsDone(userId,Id,index)} className='bg-green-500 px-8 rounded-2xl text-black font-semibold'>Done</button>
+                            <button onClick={()=>markingDone(index)} className={`${doneEx.includes(index) ? 'bg-[#444343]' : 'bg-green-500'
+                                } px-8 rounded-2xl text-black font-semibold`}>Done</button>
                             <ul className='list-decimal p-4'>
                                 <h1 className='text-lg text-green-500'>Instructions</h1>
                                 {item.instructions.map((list, i) => {
