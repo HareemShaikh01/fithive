@@ -7,16 +7,16 @@ import { markAsDone } from '../Firebase/DB';
 import { getDoneEx } from '../Firebase/DB';
 
 function Category() {
-    const { userId } = useUserStore()
+    const { userId} = useUserStore()
+    const [doneEx,setDoneEx ] = useState([]);
     const [data, setData] = useState([]);
     const [total, setTotal] = useState(-1);
-    const [doneEx, setDoneEx] = useState([]);
     const { Id } = useParams();
 
 
     useEffect(() => {
         const fetchData = async () => {
-            //const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
+            const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
             const options = {
                 method: 'GET',
                 headers: {

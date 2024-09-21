@@ -52,7 +52,7 @@ function Profile() {
                                     </div>
 
                                     <div className="text-xl md:text-3xl">
-                                        <span className='text-green-500 text-2xl font-semibold font-mono'>7</span>/{workout.totalEx} Days
+                                        <span className='text-green-500 text-2xl font-semibold font-mono'>{workout.doneEx.length}</span>/{workout.totalEx} Days
                                     </div>
                                 </li>
                                 <hr />
