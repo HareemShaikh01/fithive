@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useUserStore } from '../store/userSlice'
-import { collection, documentId } from 'firebase/firestore';
-import { EmailAuthCredential } from 'firebase/auth/web-extension';
 import { getWorkouts } from '../Firebase/DB';
 
 function Profile() {
