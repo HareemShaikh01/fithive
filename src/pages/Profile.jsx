@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useUserStore } from '../store/userSlice'
 import { collection, documentId } from 'firebase/firestore';
 import { EmailAuthCredential } from 'firebase/auth/web-extension';
@@ -7,6 +7,8 @@ import { getWorkouts } from '../Firebase/DB';
 function Profile() {
     const { userId, userName, userEmail } = useUserStore();
     const [workouts, setWorkouts] = useState([]);
+    const [imgUrl, setImgUrl] = useState(localStorage.getItem("profileUrl") || "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg")
+    const fileRef = useRef(null);
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -21,6 +23,26 @@ function Profile() {
         fetchWorkouts();
         console.log(workouts);
     }, []);
+    const toBase64 = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    
+      const handleImgUpload = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const base64 = await toBase64(file);  // Convert the file to a base64 string
+          setImgUrl(base64);  // Set the base64 string as the imgUrl
+          localStorage.setItem("profileUrl", base64);  // Store the base64 string in localStorage
+        }
+      };
+
+
+    const handleImgClick = () => {
+        fileRef.current.click();
+    }
 
 
     return (
@@ -29,10 +51,11 @@ function Profile() {
             {/* personal data */}
             <div className='md:w-1/2 pt-10'>
                 <div className='flex justify-center'>
-                    <img className='w-60 h-60 border-2 border-green-500 object-cover rounded-full' src="./wallpaperflare.com_wallpaper.jpg" alt="profile photo" />
+                    <img onClick={handleImgClick} className='w-60 h-60 border-2 border-black object-cover rounded-full' src={imgUrl} alt="profile photo" />
+                    <input onChange={handleImgUpload} ref={fileRef} className='hidden' type="file" accept="image/*" />
 
                 </div>
-                <h1 className='uppercase font-mono font-bold text-2xl text-center mt-4'>{userName}</h1>
+                <h1 className='uppercase font-serif font-bold text-2xl text-center mt-4'>{userName}</h1>
                 <h3 className='text-center text-green-500 py-2'>{userEmail}</h3>
 
             </div>
