@@ -13,7 +13,7 @@ export default function Targets() {
 
     useEffect(() => {
         const fetchData = async () => {
-            // const url = 'https://exercisedb.p.rapidapi.com/exercises/targetList';
+            const url = 'https://exercisedb.p.rapidapi.com/exercises/targetList';
             const options = {
                 method: 'GET',
                 headers: {

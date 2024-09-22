@@ -16,7 +16,7 @@ function Category() {
 
     useEffect(() => {
         const fetchData = async () => {
-            // const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
+            const url = `https://exercisedb.p.rapidapi.com/exercises/target/${Id}`;
             const options = {
                 method: 'GET',
                 headers: {

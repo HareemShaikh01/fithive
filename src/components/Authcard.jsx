@@ -5,9 +5,6 @@ import { useUserStore } from '../store/userSlice';
 import { addUser ,getUserById} from '../Firebase/DB';
 
 
-
-
-
 export default function Authcard({ setVisibility }) {
   const { setId, setName, setEmail } = useUserStore();
   
@@ -95,7 +92,7 @@ export default function Authcard({ setVisibility }) {
         <h1 className='text-center text-2xl md:text-4xl m-4 font-serif'>{heading}</h1>
 
         {heading === "Sign Up" && (
-          <div className='flex justify-between w-80 py-2 text-lg md:text-xl md:w-96'>
+          <div className='flex justify-between p-3 w-full sm:w-80 py-2 text-lg md:text-xl md:w-96'>
             <label className='font-serif' htmlFor="name">Name: </label>
             <input 
               onChange={inputCredentials} 
