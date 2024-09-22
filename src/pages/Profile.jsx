@@ -43,21 +43,23 @@ function Profile() {
 
                 <ul className='p-6'>
                     {workouts.length > 0 ? (
-                        workouts.map((workout, index) => (
-                            <div key={index}>
-                                <li className='py-4 flex justify-between'>
-                                    <div>
-                                        <i className="fa-solid fa-dumbbell text-white px-2 text-xl md:text-2xl rotate-90"></i>
-                                        <h1 className='inline text-xl md:text-2xl font-semibold px-4'>{workout.name}</h1>
-                                    </div>
+                        workouts
+                            .filter(workout => workout.doneEx.length < workout.totalEx) // Filter out completed workouts
+                            .map((workout, index) => (
+                                <div key={index}>
+                                    <li className='py-4 flex justify-between'>
+                                        <div>
+                                            <i className="fa-solid fa-dumbbell text-white px-2 text-xl md:text-2xl rotate-90"></i>
+                                            <h1 className='inline text-xl md:text-2xl font-semibold px-4'>{workout.name}</h1>
+                                        </div>
 
-                                    <div className="text-xl md:text-3xl">
-                                        <span className='text-green-500 text-2xl font-semibold font-mono'>{workout.doneEx.length}</span>/{workout.totalEx} Days
-                                    </div>
-                                </li>
-                                <hr />
-                            </div>
-                        ))
+                                        <div className="text-xl md:text-3xl">
+                                            <span className='text-green-500 text-2xl font-semibold font-mono'>{workout.doneEx.length}</span>/{workout.totalEx} Days
+                                        </div>
+                                    </li>
+                                    <hr />
+                                </div>
+                            ))
                     ) : (
                         <p className='text-center text-xl md:text-2xl font-semibold p-20'>No workouts started</p>
                     )}
