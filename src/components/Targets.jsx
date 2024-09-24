@@ -17,7 +17,7 @@ export default function Targets() {
             const options = {
                 method: 'GET',
                 headers: {
-                    'x-rapidapi-key': 'bb8fb435d6msh2e7c42a4d67130dp16c620jsn7e2e946b63f2',
+                    'x-rapidapi-key': import.meta.env.VITE_RAPID_API_KEY,
                     'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
                 }
             };
