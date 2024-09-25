@@ -88,7 +88,7 @@ export default function Authcard({ setVisibility }) {
     <div className='absolute h-screen w-full bg-[#000000e1] top-0 left-0 flex justify-center items-center text-white'>
       <i onClick={() => setVisibility(false)} className="fa-solid fa-square-xmark absolute top-6 right-6 text-green-500 text-2xl md:text-3xl cursor-pointer"></i>
 
-      <form onSubmit={submitForm} className='bg-gray-800 p-6 rounded w-full sm:w-80'>
+      <form onSubmit={submitForm} className='bg-gray-800 p-6 rounded w-full sm:w-fit'>
         <h1 className='text-center text-2xl md:text-4xl m-4 font-serif'>{heading}</h1>
 
         {heading === "Sign Up" && (
