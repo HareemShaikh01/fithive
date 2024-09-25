@@ -88,11 +88,11 @@ export default function Authcard({ setVisibility }) {
     <div className='absolute h-screen w-full bg-[#000000e1] top-0 left-0 flex justify-center items-center text-white'>
       <i onClick={() => setVisibility(false)} className="fa-solid fa-square-xmark absolute top-6 right-6 text-green-500 text-2xl md:text-3xl cursor-pointer"></i>
 
-      <form onSubmit={submitForm} className='bg-gray-800 p-6 rounded'>
+      <form onSubmit={submitForm} className='bg-gray-800 p-6 rounded w-full sm:w-80'>
         <h1 className='text-center text-2xl md:text-4xl m-4 font-serif'>{heading}</h1>
 
         {heading === "Sign Up" && (
-          <div className='flex justify-between p-3 w-full sm:w-80 py-2 text-lg md:text-xl md:w-96'>
+          <div className='flex justify-between p-3 w-full sm:w-80 py-2 md:text-xl md:w-96'>
             <label className='font-serif' htmlFor="name">Name: </label>
             <input 
               onChange={inputCredentials} 
@@ -105,7 +105,7 @@ export default function Authcard({ setVisibility }) {
           </div>
         )}
 
-        <div className='flex justify-between w-80 py-2 text-lg md:text-xl md:w-96'>
+        <div className='flex justify-between w-full sm:w-80 py-2 md:text-xl md:w-96'>
           <label className='font-serif' htmlFor="email">Email: </label>
           <input 
             onChange={inputCredentials} 
@@ -117,7 +117,7 @@ export default function Authcard({ setVisibility }) {
           />
         </div>
 
-        <div className='flex justify-between w-80 py-2 text-lg md:text-xl md:w-96'>
+        <div className='flex justify-between w-full sm:w-80 py-2 md:text-xl md:w-96'>
           <label className='font-serif' htmlFor="password">Password: </label>
           <input 
             onChange={inputCredentials} 
